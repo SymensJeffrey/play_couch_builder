@@ -6,7 +6,10 @@ const HomePage = async () => {
   const supabase = createClient();
 
   try {
-    const { data: items, error } = await supabase.from('pieces').select('*');
+    const { data: items, error } = await supabase.from('pieces').select();
+
+    console.log('Fetched items:', items);
+    console.log('Fetch error:', error);
 
     if (error) {
       console.error('Error loading items:', error);

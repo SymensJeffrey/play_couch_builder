@@ -1,15 +1,15 @@
 import React from 'react';
 
 interface CardProps {
-  title: string;
-  description: string;
+  name: string;
+  image_url: string;
 }
 
-const Card: React.FC<CardProps> = ({ title, description }) => {
+const Card: React.FC<CardProps> = ({ name, image_url }) => {
   return (
     <div className="card">
-      <h2>{title}</h2>
-      <p>{description}</p>
+      <h2>{name}</h2>
+      {image_url && <img src={image_url} alt={name} />}
     </div>
   );
 };
