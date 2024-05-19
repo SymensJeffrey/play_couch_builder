@@ -1,4 +1,5 @@
 // app/(root)/page.tsx
+import NavBar from '../components/navbar';
 import Card from '../components/card';
 import { createClient } from '../../utils/supabase/server';
 
@@ -20,7 +21,8 @@ const HomePage = async () => {
 
     return (
       <div>
-        <h1>Items from Database</h1>
+        <NavBar />
+        <h1>Select Pieces</h1>
         <div className="card-container">
           {items.map((item) => (
             <Card key={item.id} name={item.name} image_url={item.image_url} />
