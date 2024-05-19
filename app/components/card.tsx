@@ -7,9 +7,11 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ name, image_url }) => {
   return (
-    <div className="card">
-      <h2>{name}</h2>
-      {image_url && <img src={image_url} alt={name} />}
+    <div className="card w-96 bg-base-100 shadow-xl">
+      <figure><img src={image_url} alt={name} /></figure>
+      <div className="card-body">
+        <h2 className="card-title">{name}</h2>
+      </div>
     </div>
   );
 };
