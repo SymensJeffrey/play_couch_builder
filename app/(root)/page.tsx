@@ -1,42 +1,67 @@
-// app/(root)/page.tsx
+'use client';
+
+import { useState, useEffect } from 'react';
 import NavBar from '../components/navbar';
 import Card from '../components/card';
-import Hero from '../components/hero'
+import Hero from '../components/hero';
+import { createClient } from '../../utils/supabase/client'; // Import client-side Supabase client
 
-import { createClient } from '../../utils/supabase/server';
+const HomePage = () => {
+  const [items, setItems] = useState<any[]>([]);
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const supabase = createClient(); // Initialize Supabase client
 
-const HomePage = async () => {
-  const supabase = createClient();
+  const handleSelect = (id: number) => {
+    console.log('Selecting ID:', id); // Debug
+    setSelectedIds((prevSelectedIds) => {
+      const newSelectedIds = prevSelectedIds.includes(id)
+        ? prevSelectedIds.filter((itemId) => itemId !== id)
+        : [...prevSelectedIds, id];
+      console.log('Updated selected IDs:', newSelectedIds); // Debug
+      return newSelectedIds;
+    });
+  };
 
-  try {
-    const { data: items, error } = await supabase.from('pieces').select('*');
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const { data: items, error } = await supabase.from('pieces').select('*');
 
-    if (error) {
-      console.error('Error loading items:', error);
-      return <div>Error loading items</div>;
-    }
+        if (error) {
+          console.error('Error loading items:', error);
+          return;
+        }
 
-    if (!items || items.length === 0) {
-      console.log('No items found');
-      return <div>No items found</div>;
-    }
+        if (items) {
+          setItems(items);
+        }
+      } catch (error) {
+        console.error('Error fetching data from Supabase:', error);
+      }
+    };
 
-    return (
-      <div>
-        <NavBar />
-        <Hero />
-        <h1 className='m-3 text-2xl'>Select Pieces</h1>
-        <div className="card-container w-auto mx-10">
-          {items.map((item) => (
-            <Card key={item.id} name={item.name} image_url={item.image_url} />
-          ))}
-        </div>
+    fetchItems();
+  }, [supabase]);
+
+  return (
+    <div className='bg-inherit'>
+      <NavBar />
+      <Hero />
+      <h1 className='m-3 text-2xl'>Select Pieces</h1>
+      <div className="card-container w-auto m-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {items.map((item) => (
+          <Card
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            image_url={item.image_url}
+            onSelect={handleSelect}
+            isSelected={selectedIds.includes(item.id)}
+          />
+        ))}
       </div>
-    );
-  } catch (error) {
-    console.error('Error fetching data from Supabase:', error);
-    return <div>Error fetching data from Supabase</div>;
-  }
+    </div>
+  );
 };
 
 export default HomePage;
