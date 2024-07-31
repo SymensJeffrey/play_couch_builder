@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import NavBar from '../components/navbar';
-import Card from '../components/card';
+import PieceCard from '../components/pieceCard';
 import Hero from '../components/hero';
 import { createClient } from '../../utils/supabase/client';
+import Link from 'next/link';
 
 const HomePage = () => {
   const [items, setItems] = useState<any[]>([]);
@@ -48,9 +49,12 @@ const HomePage = () => {
       <NavBar />
       <Hero />
       <h1 className='m-3 text-2xl'>Select Pieces</h1>
+      <Link href='/builds' >
+        <button className='btn btn-primary'>Find Builds</button>
+      </Link>
       <div className="card-container w-auto m-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((item) => (
-          <Card
+          <PieceCard
             key={item.id}
             id={item.id}
             name={item.name}

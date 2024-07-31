@@ -8,7 +8,7 @@ interface CardProps {
   isSelected: boolean;
 }
 
-const Card: React.FC<CardProps> = ({ id, name, image_url, onSelect, isSelected }) => {
+const PieceCard: React.FC<CardProps> = ({ id, name, image_url, onSelect, isSelected }) => {
   return (
     <div
       className={`card card-compact bg-neutral w-96 shadow-xl cursor-pointer transition-transform transform ${isSelected ? 'border-4 bg-violet-300 bg-opacity-30 scale-105' : 'border-none'
@@ -30,4 +30,4 @@ const Card: React.FC<CardProps> = ({ id, name, image_url, onSelect, isSelected }
   );
 };
 
-export default Card;
+export default PieceCard;
