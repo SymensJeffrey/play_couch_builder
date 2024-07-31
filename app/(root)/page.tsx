@@ -6,6 +6,7 @@ import PieceCard from '../components/pieceCard';
 import Hero from '../components/hero';
 import { createClient } from '../../utils/supabase/client';
 import Link from 'next/link';
+import router from 'next/router';
 
 const HomePage = () => {
   const [items, setItems] = useState<any[]>([]);
@@ -21,6 +22,10 @@ const HomePage = () => {
       console.log('Updated selected IDs:', newSelectedIds);
       return newSelectedIds;
     });
+  };
+  const handleNavigateToBuilds = () => {
+    localStorage.setItem('selectedIds', JSON.stringify(selectedIds));
+    router.push('/builds');
   };
 
   useEffect(() => {
@@ -50,7 +55,7 @@ const HomePage = () => {
       <Hero />
       <h1 className='m-3 text-2xl'>Select Pieces</h1>
       <Link href='/builds' >
-        <button className='btn btn-primary'>Find Builds</button>
+        <button className='btn btn-primary' onClick={handleNavigateToBuilds}>Find Builds</button>
       </Link>
       <div className="card-container w-auto m-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((item) => (

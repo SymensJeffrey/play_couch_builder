@@ -6,12 +6,29 @@ import BuildCard from '../components/buildCard';
 
 const BuildsPage = () => {
   const [items, setItems] = useState<any[]>([]);
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const supabase = createClient();
 
   useEffect(() => {
+    const fetchSelectedIds = () => {
+      const selectedIds = localStorage.getItem('selectedIds');
+      if (selectedIds) {
+        setSelectedIds(JSON.parse(selectedIds));
+      }
+    };
+    fetchSelectedIds();
+  }, []);
+
+  useEffect(() => {
     const fetchItems = async () => {
+      if (selectedIds.length === 0) return; // No selected IDs, no need to fetch
+
       try {
-        const { data: items, error } = await supabase.from('builds').select('*');
+        // Assuming you have a `builds` table with a column for IDs
+        const { data: items, error } = await supabase
+          .from('builds')
+          .select('*')
+          .filter('pieces_array', 'cs', `{${selectedIds.join(',')}}`);
 
         if (error) {
           console.error('Error loading items:', error);
@@ -27,7 +44,9 @@ const BuildsPage = () => {
     };
 
     fetchItems();
-  }, [supabase]);
+  }, [selectedIds, supabase]);
+
+
 
 
   return (
@@ -46,8 +65,4 @@ const BuildsPage = () => {
 };
 
 export default BuildsPage;
-
-function setItems(items: any[]) {
-  throw new Error('Function not implemented.');
-}
 
