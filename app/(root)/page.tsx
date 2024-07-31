@@ -4,20 +4,20 @@ import { useState, useEffect } from 'react';
 import NavBar from '../components/navbar';
 import Card from '../components/card';
 import Hero from '../components/hero';
-import { createClient } from '../../utils/supabase/client'; // Import client-side Supabase client
+import { createClient } from '../../utils/supabase/client';
 
 const HomePage = () => {
   const [items, setItems] = useState<any[]>([]);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
-  const supabase = createClient(); // Initialize Supabase client
+  const supabase = createClient();
 
   const handleSelect = (id: number) => {
-    console.log('Selecting ID:', id); // Debug
+    console.log('Selecting ID:', id);
     setSelectedIds((prevSelectedIds) => {
       const newSelectedIds = prevSelectedIds.includes(id)
         ? prevSelectedIds.filter((itemId) => itemId !== id)
         : [...prevSelectedIds, id];
-      console.log('Updated selected IDs:', newSelectedIds); // Debug
+      console.log('Updated selected IDs:', newSelectedIds);
       return newSelectedIds;
     });
   };
