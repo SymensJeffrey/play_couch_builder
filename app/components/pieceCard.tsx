@@ -28,43 +28,39 @@ const PieceCard: React.FC<PieceCardProps> = ({ id, name, image_url, onSelect, is
 
   return (
     <div
-      className={`card card-compact bg-neutral w-96 shadow-xl cursor-pointer transition-transform transform ${isSelected ? 'border-4 bg-violet-300 bg-opacity-30 scale-105' : 'border-none'
-        }`}
+      className={`card bg-gray-800 text-white rounded-lg shadow-lg transition-transform transform ${isSelected ? 'border-4 border-blue-500 bg-opacity-80 scale-105' : 'border-none'}`}
       onClick={() => !isSelected && handleQuantityChange(1)} // Select with default quantity of 1
     >
-      <figure>
+      <figure className="relative pb-9/16">
         <img
           src={image_url}
           alt={name}
-          className={`object-cover w-full h-48 transition-opacity ${isSelected ? 'opacity-80' : 'opacity-100'
-            }`}
+          className={`object-cover w-full h-full transition-opacity ${isSelected ? 'opacity-80' : 'opacity-100'}`}
         />
       </figure>
-      <div className="card-body">
-        <h2 className="card-title text-center">{name}</h2>
+      <div className="p-4">
+        <h2 className="text-lg font-semibold text-center">{name}</h2>
         {isSelected && (
-          <div className="flex flex-col items-center mt-4">
-            <div className="flex items-center">
-              <button
-                onClick={(e) => { e.stopPropagation(); handleQuantityChange(-1); }}
-                className="btn btn-secondary"
-              >
-                -
-              </button>
-              <input
-                type="number"
-                value={localQuantity}
-                min="0"
-                readOnly
-                className="input input-bordered w-14 justify-items-center"
-              />
-              <button
-                onClick={(e) => { e.stopPropagation(); handleQuantityChange(1); }}
-                className="btn btn-secondary"
-              >
-                +
-              </button>
-            </div>
+          <div className="flex justify-center items-center mt-4">
+            <button
+              onClick={(e) => { e.stopPropagation(); handleQuantityChange(-1); }}
+              className="btn btn-secondary btn-sm text-white py-1 px-3 rounded"
+            >
+              -
+            </button>
+            <input
+              type="number"
+              value={localQuantity}
+              min="0"
+              readOnly
+              className="mx-2 text-center w-12 bg-gray-900 text-white border-none"
+            />
+            <button
+              onClick={(e) => { e.stopPropagation(); handleQuantityChange(1); }}
+              className="btn btn-secondary btn-sm text-white h-auto"
+            >
+              +
+            </button>
           </div>
         )}
       </div>

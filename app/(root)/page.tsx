@@ -6,7 +6,6 @@ import PieceCard from '../components/pieceCard';
 import Hero from '../components/hero';
 import { createClient } from '../../utils/supabase/client';
 import Link from 'next/link';
-import router from 'next/router';
 
 const HomePage = () => {
   const [items, setItems] = useState<any[]>([]);
@@ -37,7 +36,6 @@ const HomePage = () => {
 
   const handleNavigateToBuilds = () => {
     localStorage.setItem('selectedIds', JSON.stringify(selectedIds));
-    router.push('/builds');
   };
 
   useEffect(() => {
@@ -62,25 +60,31 @@ const HomePage = () => {
   }, [supabase]);
 
   return (
-    <div className='bg-inherit'>
+    <div className="bg-gray-900 min-h-screen text-white">
       <NavBar />
       <Hero />
-      <h1 className='m-3 text-2xl'>Select Pieces</h1>
-      <Link href='/builds'>
-        <button className='btn btn-primary' onClick={handleNavigateToBuilds}>Find Builds</button>
-      </Link>
-      <div className="card-container w-auto m-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.map((item) => (
-          <PieceCard
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            image_url={item.image_url}
-            onSelect={handleSelect}
-            isSelected={selectedIds.includes(item.id)}
-            quantity={selectedIds.filter((selectedId) => selectedId === item.id).length || 0}
-          />
-        ))}
+      <div className="container mx-auto px-44 py-8">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold mb-4">Select Pieces</h1>
+          <Link href='/builds'>
+            <button className="btn btn-primary text-white py-2 px-4 rounded" onClick={handleNavigateToBuilds}>
+              Find Builds
+            </button>
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {items.map((item) => (
+            <PieceCard
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              image_url={item.image_url}
+              onSelect={handleSelect}
+              isSelected={selectedIds.includes(item.id)}
+              quantity={selectedIds.filter((selectedId) => selectedId === item.id).length || 0}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
