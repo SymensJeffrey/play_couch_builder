@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface PieceCardProps {
   id: number;
@@ -11,6 +11,10 @@ interface PieceCardProps {
 
 const PieceCard: React.FC<PieceCardProps> = ({ id, name, image_url, onSelect, isSelected, quantity }) => {
   const [localQuantity, setLocalQuantity] = useState(quantity);
+
+  useEffect(() => {
+    setLocalQuantity(quantity);
+  }, [quantity]);
 
   const handleQuantityChange = (amount: number) => {
     const newQuantity = localQuantity + amount;

@@ -78,7 +78,7 @@ const HomePage = () => {
             image_url={item.image_url}
             onSelect={handleSelect}
             isSelected={selectedIds.includes(item.id)}
-            quantity={selectedIds.filter((selectedId) => selectedId === item.id).length || 1}
+            quantity={selectedIds.filter((selectedId) => selectedId === item.id).length || 0}
           />
         ))}
       </div>
