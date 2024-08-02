@@ -13,16 +13,28 @@ const HomePage = () => {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const supabase = createClient();
 
-  const handleSelect = (id: number) => {
-    console.log('Selecting ID:', id);
+  const handleSelect = (id: number, quantity: number) => {
     setSelectedIds((prevSelectedIds) => {
-      const newSelectedIds = prevSelectedIds.includes(id)
-        ? prevSelectedIds.filter((itemId) => itemId !== id)
-        : [...prevSelectedIds, id];
-      console.log('Updated selected IDs:', newSelectedIds);
+      const newSelectedIds = [...prevSelectedIds];
+      const currentCount = newSelectedIds.filter((itemId) => itemId === id).length;
+
+      if (quantity > currentCount) {
+        for (let i = 0; i < quantity - currentCount; i++) {
+          newSelectedIds.push(id);
+        }
+      } else {
+        for (let i = 0; i < currentCount - quantity; i++) {
+          const index = newSelectedIds.indexOf(id);
+          if (index !== -1) {
+            newSelectedIds.splice(index, 1);
+          }
+        }
+      }
+
       return newSelectedIds;
     });
   };
+
   const handleNavigateToBuilds = () => {
     localStorage.setItem('selectedIds', JSON.stringify(selectedIds));
     router.push('/builds');
@@ -54,7 +66,7 @@ const HomePage = () => {
       <NavBar />
       <Hero />
       <h1 className='m-3 text-2xl'>Select Pieces</h1>
-      <Link href='/builds' >
+      <Link href='/builds'>
         <button className='btn btn-primary' onClick={handleNavigateToBuilds}>Find Builds</button>
       </Link>
       <div className="card-container w-auto m-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -66,6 +78,7 @@ const HomePage = () => {
             image_url={item.image_url}
             onSelect={handleSelect}
             isSelected={selectedIds.includes(item.id)}
+            quantity={selectedIds.filter((selectedId) => selectedId === item.id).length || 1}
           />
         ))}
       </div>
