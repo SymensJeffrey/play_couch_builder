@@ -9,7 +9,7 @@ interface CardProps {
 const BuildCard: React.FC<CardProps> = ({ id, name, image_url }) => {
   return (
     <div
-      className={'card bg-neutral w-96 shadow-xl cursor-pointer transition-transform transform'}
+      className={'card-lg bg-neutral w-96 shadow-xl cursor-pointer transition-transform transform'}
     >
       <figure>
         <img
@@ -19,7 +19,7 @@ const BuildCard: React.FC<CardProps> = ({ id, name, image_url }) => {
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title text-center">{name}</h2>
+        <h2 className="card-title text-center justify-center">{name}</h2>
       </div>
     </div>
   );
