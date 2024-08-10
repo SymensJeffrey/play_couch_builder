@@ -26,10 +26,19 @@ const PieceCard: React.FC<PieceCardProps> = ({ id, name, image_url, onSelect, is
     setLocalQuantity(newQuantity);
   };
 
+  const handleCardClick = () => {
+    if (isSelected) {
+      onSelect(id, 0); // Unselect the item if it's already selected
+      setLocalQuantity(0);
+    } else {
+      handleQuantityChange(1); // Select with default quantity of 1
+    }
+  };
+
   return (
     <div
       className={`card bg-gray-800 text-white rounded-lg shadow-lg transition-transform transform ${isSelected ? 'border-4 border-blue-500 bg-opacity-80 scale-105' : 'border-none'}`}
-      onClick={() => !isSelected && handleQuantityChange(1)} // Select with default quantity of 1
+      onClick={handleCardClick}
     >
       <figure className="relative pb-9/16">
         <img
