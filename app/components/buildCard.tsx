@@ -9,13 +9,13 @@ interface CardProps {
 const BuildCard: React.FC<CardProps> = ({ id, name, image_url }) => {
   return (
     <div
-      className={'card-lg bg-neutral w-96 shadow-xl cursor-pointer transition-transform transform'}
+      className={'card bg-neutral w-96 shadow-xl cursor-pointer transition-transform transform'}
     >
-      <figure>
+      <figure className="relative pb-9/16">
         <img
           src={image_url}
           alt={name}
-          className={'object-cover w-full h-48 transition-opacity'}
+          className={'object-cover w-full h-full transition-opacity'}
         />
       </figure>
       <div className="card-body">
