@@ -1,4 +1,4 @@
-const Hero = () => {
+const Hero = ({ onGetStarted }: { onGetStarted: () => void }) => {
   return (
     <div
       className="hero min-h-screen"
@@ -15,7 +15,9 @@ const Hero = () => {
           <p className="mb-5">
             Select the play couch pieces you have and find some new and exciting builds to try out!
           </p>
-          <button className="btn btn-primary">Get Started</button>
+          <button className="btn btn-primary" onClick={onGetStarted}>
+            Get Started
+          </button>
         </div>
       </div>
     </div>

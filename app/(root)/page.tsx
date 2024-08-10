@@ -6,11 +6,12 @@ import PieceCard from '../components/pieceCard';
 import Hero from '../components/hero';
 import { createClient } from '../../utils/supabase/client';
 import Link from 'next/link';
-
+import { useRef } from 'react';
 const HomePage = () => {
   const [items, setItems] = useState<any[]>([]);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const supabase = createClient();
+  const selectPiecesRef = useRef<HTMLDivElement>(null); // Create a ref for the "Select Pieces" section
 
   const handleSelect = (id: number, quantity: number) => {
     setSelectedIds((prevSelectedIds) => {
@@ -38,6 +39,12 @@ const HomePage = () => {
     localStorage.setItem('selectedIds', JSON.stringify(selectedIds));
   };
 
+  const handleGetStarted = () => {
+    if (selectPiecesRef.current) {
+      selectPiecesRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -62,8 +69,8 @@ const HomePage = () => {
   return (
     <div className="bg-gray-900 min-h-screen text-white">
       <NavBar />
-      <Hero />
-      <div className="container mx-auto px-6 py-8 2xl:px-64">
+      <Hero onGetStarted={handleGetStarted} />
+      <div ref={selectPiecesRef} className="container mx-auto px-6 py-8 2xl:px-64">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-4">Select Pieces</h1>
           <Link href='/builds'>
