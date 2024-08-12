@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import NavBar from '../components/navbar';
-import PieceCard from '../components/pieceCard';
 import Hero from '../components/hero';
 import { createClient } from '../../utils/supabase/client';
-import Link from 'next/link';
 import { useRef } from 'react';
+import PieceSelector from '../components/pieceSelector';
 const HomePage = () => {
   const [items, setItems] = useState<any[]>([]);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
@@ -45,32 +44,11 @@ const HomePage = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const { data: items, error } = await supabase.from('pieces').select('*');
-
-        if (error) {
-          console.error('Error loading items:', error);
-          return;
-        }
-
-        if (items) {
-          setItems(items);
-        }
-      } catch (error) {
-        console.error('Error fetching data from Supabase:', error);
-      }
-    };
-
-    fetchItems();
-  }, [supabase]);
-
   return (
-    <div className="bg-gray-900 min-h-screen text-white">
+    <div>
       <NavBar />
       <Hero onGetStarted={handleGetStarted} />
-      <div ref={selectPiecesRef} className="container mx-auto px-6 py-8 2xl:px-64">
+      {/* <div ref={selectPiecesRef} className="container mx-auto px-6 py-8 2xl:px-64">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-4">Select Pieces</h1>
           <Link href='/builds'>
@@ -92,7 +70,34 @@ const HomePage = () => {
             />
           ))}
         </div>
-      </div>
+        <section
+          id="features"
+          className="bg-primary/[.03] py-16 md:py-20 lg:py-28"
+        >
+          <div className="container">
+            <SectionTitle
+              title="Main Features"
+              paragraph="There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form."
+              center
+            />
+
+            <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+              {items.map((item) => (
+                <PieceCard
+                  key={item.id}
+                  id={item.id}
+                  name={item.name}
+                  image_url={item.image_url}
+                  onSelect={handleSelect}
+                  isSelected={selectedIds.includes(item.id)}
+                  quantity={selectedIds.filter((selectedId) => selectedId === item.id).length || 0}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      </div> */}
+      <PieceSelector />
     </div>
   );
 };

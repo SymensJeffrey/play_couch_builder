@@ -48,12 +48,14 @@ const PieceCard: React.FC<PieceCardProps> = ({ id, name, image_url, onSelect, is
         />
       </figure>
       <div className="p-4">
-        <h2 className="text-lg font-semibold text-center">{name}</h2>
+        <h3 className="mb-5 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl text-center">
+          {name}
+        </h3>
         {isSelected && (
           <div className="flex justify-center items-center mt-4">
             <button
               onClick={(e) => { e.stopPropagation(); handleQuantityChange(-1); }}
-              className="btn btn-secondary btn-sm text-white py-1 px-3 rounded"
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md bg-primary text-white shadow-md transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp"
             >
               -
             </button>
@@ -62,11 +64,11 @@ const PieceCard: React.FC<PieceCardProps> = ({ id, name, image_url, onSelect, is
               value={localQuantity}
               min="0"
               readOnly
-              className="mx-2 text-center w-12 bg-gray-900 text-white border-none"
+              className="w-20 h-10 rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
             />
             <button
               onClick={(e) => { e.stopPropagation(); handleQuantityChange(1); }}
-              className="btn btn-secondary btn-sm text-white h-auto"
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md bg-primary text-white shadow-md transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp"
             >
               +
             </button>
