@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import NavBar from '../components/navbar';
 import Hero from '../components/hero';
 import { createClient } from '../../utils/supabase/client';
 import { useRef } from 'react';
@@ -46,7 +45,6 @@ const HomePage = () => {
 
   return (
     <div>
-      <NavBar />
       <Hero onGetStarted={handleGetStarted} />
       {/* <div ref={selectPiecesRef} className="container mx-auto px-6 py-8 2xl:px-64">
         <div className="text-center mb-8">

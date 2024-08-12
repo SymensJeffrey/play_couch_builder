@@ -48,7 +48,7 @@ const PieceCard: React.FC<PieceCardProps> = ({ id, name, image_url, onSelect, is
         />
       </figure>
       <div className="p-4">
-        <h3 className="mb-5 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl text-center">
+        <h3 className="mb-5 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl text-center">
           {name}
         </h3>
         {isSelected && (
