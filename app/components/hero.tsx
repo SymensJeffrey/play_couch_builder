@@ -39,7 +39,7 @@ const Hero = ({ onGetStarted }: { onGetStarted: () => void }) => {
                   Play Couch Builder
                 </h1>
                 <p className="mb-12 text-base font-medium !leading-relaxed text-body-color dark:text-white dark:opacity-90 sm:text-lg md:text-xl">
-                  Select the play couch pieces you have and find some new and exciting builds to try out!
+                  Struggling to find what to build with your play couch? Not anymore, just select the pieces you have and find new fun builds to try out!
                 </p>
                 <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
                   <button
