@@ -1,9 +1,10 @@
-'use client';
+import SectionTitle from "./Common/SectionTitle";
 import { createClient } from '../../utils/supabase/client';
 import { useEffect, useState } from 'react';
-import BuildView from '../components/buildView';
+import BuildCard from "./buildCard";
 
-const BuildsPage = () => {
+const BuildView = () => {
+
   const [items, setItems] = useState<any[]>([]);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const supabase = createClient();
@@ -53,25 +54,30 @@ const BuildsPage = () => {
   }, [selectedIds, supabase]);
 
   return (
-    // <div className="bg-gray-900 min-h-screen text-white">
-    //   <NavBar />
-    //   <div className="container mx-auto px-6 py-8 2xl:px-64">
-    //     <div className="text-center mb-8">
-    //       <h1 className="text-3xl font-bold mb-4">Builds</h1>
-    //     </div>
-    //     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-6">
-    //       {items.map((item) => (
-    //         <BuildCard
-    //           key={item.id}
-    //           id={item.id}
-    //           name={item.name}
-    //           image_url={item.image_url} />
-    //       ))}
-    //     </div>
-    //   </div>
-    // </div>
-    <BuildView />
+    <>
+      <section
+        id="features"
+        className="bg-primary/[.03] py-16 md:py-20 lg:py-28"
+      >
+        <div className="container">
+          <SectionTitle
+            title="Builds"
+            paragraph=""
+            center
+          />
+          <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center">
+            {items.map((item) => (
+              <BuildCard
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                image_url={item.image_url} />
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 
-export default BuildsPage;
+export default BuildView;
