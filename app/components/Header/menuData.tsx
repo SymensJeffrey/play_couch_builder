@@ -15,7 +15,7 @@ const menuData: Menu[] = [
       {
         id: 42,
         title: "Submit Build",
-        path: "/contact",
+        path: "/buildCreate",
         newTab: false,
       }
     ],
