@@ -105,10 +105,10 @@ const Footer = () => {
                       className="mb-4 inline-block text-base font-medium text-body-color hover:text-primary"
                     >
                       {" "}
-                      Blog{" "}
+                      Contact{" "}
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a
                       href="/"
                       className="mb-4 inline-block text-base font-medium text-body-color hover:text-primary"
@@ -125,7 +125,7 @@ const Footer = () => {
                       {" "}
                       About{" "}
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
