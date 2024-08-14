@@ -6,6 +6,7 @@ const menuData: Menu[] = [
     title: "Home",
     path: "/",
     newTab: false,
+    submenu: []
   },
   {
     id: 4,
@@ -17,8 +18,10 @@ const menuData: Menu[] = [
         title: "Submit Build",
         path: "/buildCreate",
         newTab: false,
+        submenu: []
       }
     ],
+    path: ""
   },
 ];
 export default menuData;
