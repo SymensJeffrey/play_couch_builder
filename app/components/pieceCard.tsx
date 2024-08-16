@@ -19,19 +19,19 @@ const PieceCard: React.FC<PieceCardProps> = ({ id, name, image_url, onSelect, is
   const handleQuantityChange = (amount: number) => {
     const newQuantity = localQuantity + amount;
     if (newQuantity <= 0) {
-      onSelect(id, 0); // Unselect item if quantity goes to 0
+      onSelect(id, 0);
     } else {
-      onSelect(id, newQuantity); // Update quantity
+      onSelect(id, newQuantity);
     }
     setLocalQuantity(newQuantity);
   };
 
   const handleCardClick = () => {
     if (isSelected) {
-      onSelect(id, 0); // Unselect the item if it's already selected
+      onSelect(id, 0);
       setLocalQuantity(0);
     } else {
-      handleQuantityChange(1); // Select with default quantity of 1
+      handleQuantityChange(1);
     }
   };
 
