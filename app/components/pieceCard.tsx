@@ -37,7 +37,7 @@ const PieceCard: React.FC<PieceCardProps> = ({ id, name, image_url, onSelect, is
 
   return (
     <div
-      className={`wow fadeInUp h-auto w-full sm:w-64 md:w-72 lg:w-72 relative overflow-hidden rounded-md bg-white shadow-one dark:bg-dark ${isSelected ? 'border-4 border-blue-500 bg-opacity-80 scale-105' : 'border-none'}`}
+      className={`wow fadeInUp h-auto w-full sm:w-64 md:w-72 lg:w-72 relative overflow-hidden rounded-md bg-white shadow-one dark:bg-dark ${isSelected ? 'border-4 border-primary bg-opacity-80 scale-105' : 'border-none'}`}
       onClick={handleCardClick}
     >
       <figure className="relative pb-9/16">
